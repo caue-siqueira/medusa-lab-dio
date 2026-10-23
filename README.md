@@ -51,25 +51,25 @@ Foram identificados serviços como FTP, SSH, Telnet, HTTP e SMB, incluindo vers�
 | 139/tcp | SMB/NetBIOS | Samba |
 | 445/tcp | SMB | Samba 3.0.20-Debian |
 
-![Nmap - Service Scan](images/01-nmap-service-scan.png)
+![Nmap - Service Scan](imagens/01-nmap-service-scan.png)
 
 ## 2. Inventário de serviços
 
 O inventário reúne os serviços identificados durante o reconhecimento inicial e ajuda a priorizar os componentes que precisam de revisão.
 
-![Inventário de serviços](images/02-service-inventory.png)
+![Inventário de serviços](imagens/02-service-inventory.png)
 
 ## 3. Verificação do serviço FTP
 
 O serviço FTP identificado foi verificado separadamente. O acesso manual com a credencial de laboratório `msfadmin` foi confirmado.
 
-![Verificação do FTP](images/03-ftp-service-check.png)
+![Verificação do FTP](imagens/03-ftp-service-check.png)
 
 ### Teste automatizado com Medusa
 
 Foi realizada uma tentativa de auditoria de autenticação FTP com uma lista controlada de senhas. O teste automatizado não produziu confirmação conclusiva de sucesso; portanto, não é apresentado como uma senha descoberta pelo Medusa.
 
-![Teste Medusa FTP](images/04-ftp-medusa-test.png)
+![Teste Medusa FTP](imagens/04-ftp-medusa-test.png)
 
 ## 4. Enumeração de compartilhamentos SMB
 
@@ -87,7 +87,7 @@ Resultados observados:
 - O serviço utilizava Samba 3.0.20-Debian.
 - Os compartilhamentos `IPC$` e `tmp` permitiam acesso anônimo de leitura e escrita, conforme a enumeração realizada.
 
-![Enumeração de compartilhamentos SMB](images/05-smb-share-enumeration.png)
+![Enumeração de compartilhamentos SMB](imagens/05-smb-share-enumeration.png)
 
 ## 5. Enumeração de usuários SMB
 
@@ -101,7 +101,7 @@ A ferramenta identificou a possibilidade de estabelecer uma sessão SMB anônima
 
 **Impacto potencial:** a exposição de informações de usuários pode facilitar o reconhecimento do ambiente e apoiar tentativas de acesso não autorizado.
 
-![Enumeração de usuários SMB](images/06-smb-user-enumeration.png)
+![Enumeração de usuários SMB](imagens/06-smb-user-enumeration.png)
 
 ## 6. Auditoria de autenticação SMB com Medusa
 
@@ -115,7 +115,7 @@ O resultado observado confirmou a autenticação SMB e o acesso permitido ao rec
 
 **Resultado:** autenticação confirmada para a credencial testada. A credencial já era conhecida a partir da validação manual no FTP; portanto, o teste demonstra que a mesma credencial permitia acesso a mais de um serviço, e não que o Medusa descobriu a senha de forma independente.
 
-![Medusa SMB - Autenticação confirmada](images/07-smb-medusa-authentication-success.png)
+![Medusa SMB - Autenticação confirmada](imagens/07-smb-medusa-authentication-success.png)
 
 ## 7. Teste de autenticação web com DVWA
 
@@ -125,7 +125,7 @@ A tentativa automatizada com o módulo `web-form` do Medusa retornou erro HTTP `
 
 **Resultado:** o teste automatizado permaneceu inconclusivo e não é classificado como uma autenticação bem-sucedida pelo Medusa.
 
-![Teste do formulário web DVWA](images/08-dvwa-web-form-test.png)
+![Teste do formulário web DVWA](imagens/08-dvwa-web-form-test.png)
 
 ## Principais achados e recomendações
 
